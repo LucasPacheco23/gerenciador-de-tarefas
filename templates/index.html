@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gerenciador de Tarefas</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="cabecalho-principal">
+            <div class="detalhe-titulo"></div>
+
+            <h1>Meu Gerenciador de Tarefas</h1>
+
+            <p>
+                Organize suas atividades, acompanhe seu progresso
+                e transforme seus objetivos em conquistas.
+            </p>
+        </header>
+
+        <section class="painel-estatisticas">
+
+            <div class="cartao-estatistica">
+                <span class="estatistica-titulo">Total de tarefas</span>
+                <strong class="estatistica-numero">
+                    {{ estatisticas['total'] or 0 }}
+                </strong>
+            </div>
+
+            <div class="cartao-estatistica pendentes">
+                <span class="estatistica-titulo">Pendentes</span>
+                <strong class="estatistica-numero">
+                    {{ estatisticas['pendentes'] or 0 }}
+                </strong>
+            </div>
+
+            <div class="cartao-estatistica concluidas">
+                <span class="estatistica-titulo">Concluídas</span>
+                <strong class="estatistica-numero">
+                    {{ estatisticas['concluidas'] or 0 }}
+                </strong>
+            </div>
+
+        </section>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria, mensagem in mensagens %}
+                    <div class="mensagem {{ categoria }} notificacao">
+                        {{ mensagem }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <section class="painel">
+
+            <h2>Nova tarefa</h2>
+
+            <form action="{{ url_for('adicionar') }}" method="POST">
+
+                <label for="titulo">Título</label>
+
+                <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    placeholder="Ex.: Estudar Python"
+                    maxlength="150"
+                    required
+                >
+
+                <label for="descricao">Descrição</label>
+
+                <textarea
+                    id="descricao"
+                    name="descricao"
+                    placeholder="Descreva sua tarefa..."
+                    rows="3"
+                ></textarea>
+
+                <label for="prioridade">Prioridade</label>
+
+                <select
+                    id="prioridade"
+                    name="prioridade"
+                    required
+                >
+                    <option value="Baixa">Baixa</option>
+                    <option value="Media" selected>Media</option>
+                    <option value="Alta">Alta</option>
+                </select>
+
+                <label for="data_vencimento">Data de vencimento</label>
+                <input
+                    type="date"
+                    id="data_vencimento"
+                    name="data_vencimento"
+                >
+
+                <button type="submit" class="botao primario">
+                    Adicionar tarefa
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="painel">
+
+            <h2>Minhas tarefas</h2>
+
+            <form method="GET" action="{{ url_for('inicio') }}" class="filtros">
+
+                <div class="campo-filtro">
+                    <label for="busca">Pesquisar tarefa</label>
+
+                    <input
+                        type="text"
+                        id="busca"
+                        name="busca"
+                        placeholder="Digite o título..."
+                        value="{{ busca }}"
+                    >
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="status">Situação</label>
+
+                    <select id="status" name="status">
+                        <option value="todas"
+                            {% if status == 'todas' %}selected{% endif %}>
+                            Todas
+                        </option>
+
+                        <option value="pendentes"
+                            {% if status == 'pendentes' %}selected{% endif %}>
+                            Pendentes
+                        </option>
+
+                        <option value="concluidas"
+                            {% if status == 'concluidas' %}selected{% endif %}>
+                            Concluídas
+                        </option>
+                    </select>
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="prioridade_filtro">Prioridade</label>
+
+                    <select id="prioridade_filtro" name="prioridade">
+                        <option value="todas"
+                            {% if prioridade == 'todas' %}selected{% endif %}>
+                            Todas
+                        </option>
+
+                        <option value="Baixa"
+                            {% if prioridade == 'Baixa' %}selected{% endif %}>
+                            Baixa
+                        </option>
+
+                        <option value="Media"
+                            {% if prioridade == 'Media' %}selected{% endif %}>
+                            Média
+                        </option>
+
+                        <option value="Alta"
+                            {% if prioridade == 'Alta' %}selected{% endif %}>
+                            Alta
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="botao-filtrar">
+                    Filtrar
+                </button>
+
+                <a href="{{ url_for('inicio') }}" class="botao-limpar">
+                    Limpar filtros
+                </a>
+
+            </form>
+
+            {% if tarefas %}
+
+                <ul class="lista-tarefas">
+
+                    {% for tarefa in tarefas %}
+
+                        <li class="tarefa {% if tarefa['concluida'] %}concluida{% endif %}">
+
+                            <div class="conteudo-tarefa">
+
+                                <h3>{{ tarefa['titulo'] }}</h3>
+
+                                {% if tarefa['descricao'] %}
+                                    <p>{{ tarefa['descricao'] }}</p>
+                                {% endif %}
+
+                                <span class="status">
+                                    {% if tarefa['concluida'] %}
+                                        Concluída
+                                    {% else %}
+                                        Pendente
+                                    {% endif %}
+                                </span>
+
+                                <span class="prioridade prioridade-{{ tarefa['prioridade']|lower }}">
+                                    Prioridade: {{ tarefa['prioridade'] }}
+                                </span>
+
+                                {% if tarefa['data_vencimento'] %}
+                                    <p class="vencimento">
+                                        Vencimento:
+                                        {{ tarefa['data_vencimento'].split('-')[2] }}/{{ tarefa['data_vencimento'].split('-')[1] }}/{{ tarefa['data_vencimento'].split('-')[0] }}
+                                    </p>
+                                {% else %}
+                                    <p class="vencimento">
+                                        Sem prazo definido
+                                    </p>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="acoes">
+
+                                <form
+                                    action="{{ url_for('concluir', id=tarefa['id']) }}"
+                                    method="POST"
+                                >
+                                    <button type="submit" class="botao secundario">
+                                        {% if tarefa['concluida'] %}
+                                            Reabrir
+                                        {% else %}
+                                            Concluir
+                                        {% endif %}
+                                    </button>
+                                </form>
+
+                                <form>
+                                    <a
+                                        href="{{ url_for('editar', id=tarefa['id']) }}"
+                                        class="botao secundario"
+                                    >
+                                        Editar
+                                    </a>
+                                </form>
+
+                                <form
+                                    action="{{ url_for('excluir', id=tarefa['id']) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Deseja excluir esta tarefa?');"
+                                >
+                                    <button type="submit" class="botao perigo">
+                                        Excluir
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            {% else %}
+
+                <p class="vazio">
+                    Você ainda não cadastrou nenhuma tarefa.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const notificacoes = document.querySelectorAll(".notificacao");
+
+            notificacoes.forEach(function (notificacao) {
+                setTimeout(function () {
+                    notificacao.style.transition = "opacity 0.5s ease";
+                    notificacao.style.opacity = "0";
+
+                    setTimeout(function () {
+                        notificacao.remove();
+                    }, 500);
+
+                }, 3000);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

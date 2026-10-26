@@ -1,0 +1,575 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.container {
+    width: 90%;
+    max-width: 850px;
+    margin: 40px auto;
+}
+
+.cabecalho {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cabecalho h1 {
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.cabecalho p {
+    color: #6b7280;
+}
+
+.painel {
+    background-color: #ffffff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.painel h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin: 15px 0 7px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font: inherit;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid #93c5fd;
+    border-color: #2563eb;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.botao {
+    display: inline-block;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primario {
+    background-color: #2563eb;
+    color: white;
+}
+
+.secundario {
+    background-color: #e5e7eb;
+    color: #1f2937;
+}
+
+.botao.perigo {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.botao.perigo:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+    filter: none;
+}
+
+.botao:hover {
+    filter: brightness(0.95);
+}
+
+form > .primario {
+    margin-top: 18px;
+}
+
+.lista-tarefas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tarefa {
+    padding: 18px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tarefa:last-child {
+    border-bottom: none;
+}
+
+.conteudo-tarefa h3 {
+    margin: 0 0 8px;
+    overflow-wrap: anywhere;
+}
+
+.conteudo-tarefa p {
+    color: #6b7280;
+    overflow-wrap: anywhere;
+}
+
+.status {
+    display: inline-block;
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 5px;
+}
+
+.concluida h3 {
+    text-decoration: line-through;
+    color: #6b7280;
+}
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.acoes form {
+    margin: 0;
+}
+
+.mensagem {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+}
+
+.sucesso {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.erro {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.vazio {
+    color: #6b7280;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.vencimento {
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.prioridade {
+    display: inline-block;
+   margin-top: 8px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.prioridade-alta {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.prioridade-media {
+     background-color: #fef3c7;
+     color: #92400e;
+}
+
+.prioridade-baixa {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font: inherit;
+    background-color: white;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 14px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-filtro label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo-filtro input,
+.campo-filtro select {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.botao-filtrar {
+    display: inline-block;
+    padding: 10px 14px;
+    color: #374151;
+    background-color: #e5e7eb;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.botao-filtrar:hover {
+    background-color: #d1d5db;
+}
+
+.botao-limpar {
+    display: inline-block;
+    padding: 10px 14px;
+    color: #374151;
+    background-color: #e5e7eb;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.botao-limpar:hover {
+    background-color: #d1d5db;
+}
+
+.painel-estatisticas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 24px 0;
+}
+
+.cartao-estatistica {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+}
+
+.estatistica-titulo {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.estatistica-numero {
+    color: #111827;
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.cartao-estatistica:not(.pendentes):not(.concluidas) {
+    border-left: 5px solid #3b82f6;
+}
+
+.cartao-estatistica.pendentes {
+    border-left: 5px solid #f59e0b;
+}
+
+.cartao-estatistica.concluidas {
+    border-left: 5px solid #10b981;
+}
+
+/* Cabeçalho principal */
+.cabecalho-principal {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 12px 0 8px;
+}
+
+.cabecalho-principal h1 {
+    margin: 14px 0 12px;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #6366f1,
+        #8b5cf6
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.cabecalho-principal p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #64748b;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Detalhe decorativo */
+.detalhe-titulo {
+    width: 58px;
+    height: 5px;
+    margin: 0 auto;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        90deg,
+        #2563eb,
+        #8b5cf6
+    );
+}
+
+/* Lista de tarefas */
+.lista-tarefas {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Cartão individual */
+.lista-tarefas > li {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #3b82f6;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.lista-tarefas > li:hover {
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Título da tarefa */
+.lista-tarefas > li h3 {
+    color: #1e293b;
+    font-size: 19px;
+    line-height: 1.4;
+    margin: 0 0 10px;
+}
+
+/* Descrição */
+.lista-tarefas > li p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Prioridade */
+.prioridade {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.prioridade-alta {
+    color: #b91c1c;
+    background-color: #fee2e2;
+}
+
+.prioridade-media {
+    color: #92400e;
+    background-color: #fef3c7;
+}
+
+.prioridade-baixa {
+    color: #166534;
+    background-color: #dcfce7;
+}
+
+/* Prazo */
+.lista-tarefas .vencimento {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Links e botões dentro dos cartões */
+.lista-tarefas a,
+.lista-tarefas button {
+    display: inline-block;
+    padding: 9px 13px;
+    border: none;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Botões e links de ação */
+.lista-tarefas button {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.lista-tarefas button:hover {
+    background-color: #1d4ed8;
+}
+
+.lista-tarefas a {
+    color: #1d4ed8;
+    background-color: #eff6ff;
+}
+
+.lista-tarefas a:hover {
+    background-color: #dbeafe;
+}
+
+/* Formulários de ação */
+.lista-tarefas form {
+    display: inline-block;
+    margin: 4px 4px 4px 0;
+}
+
+/* Alinhar os botões de ação */
+.lista-tarefas form {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin: 4px 4px 4px 0;
+}
+
+.lista-tarefas a,
+.lista-tarefas button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 36px;
+    line-height: 1.2;
+    vertical-align: middle;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 600px) {
+    .container {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .painel {
+        padding: 18px;
+    }
+
+    .acoes .botao {
+        font-size: 13px;
+    }
+
+    .prioridade {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 5px 9px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .prioridade-alta {
+        background-color: #fee2e2;
+        color: #991b1b;
+    }
+
+    .prioridade-media {
+        background-color: #fef3c7;
+        color: #92400e;
+    }
+
+    .prioridade-baixa {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+
+    select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 7px;
+        font: inherit;
+        background-color: white;
+    }
+
+    .painel-estatisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecalho-principal {
+        margin-bottom: 24px;
+    }
+
+    .cabecalho-principal h1 {
+        letter-spacing: -0.8px;
+    }
+
+    .cabecalho-principal p {
+        font-size: 14px;
+        padding: 0 8px;
+    }
+
+    .lista-tarefas > li {
+        padding: 16px;
+    }
+
+    .lista-tarefas > li h3 {
+        font-size: 17px;
+    }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar tarefa</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <section class="painel">
+
+            <h1>Editar tarefa</h1>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+                {% if mensagens %}
+                    {% for categoria, mensagem in mensagens %}
+                        <div class="mensagem {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form
+                action="{{ url_for('editar', id=tarefa['id']) }}"
+                method="POST"
+            >
+
+                <label for="titulo">Título</label>
+
+                <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    value="{{ tarefa['titulo'] }}"
+                    maxlength="150"
+                    required
+                >
+
+                <label for="descricao">Descrição</label>
+
+                <textarea
+                    id="descricao"
+                    name="descricao"
+                    rows="5"
+                >{{ tarefa['descricao'] or '' }}</textarea>
+
+                <div class="acoes">
+                    <button type="submit" class="botao primario">
+                        Salvar alterações
+                    </button>
+
+                <label for="prioridade">Prioridade</label>
+
+                <select id="prioridade" name="prioridade">
+
+                    <option
+                        value="Baixa"
+                        {% if tarefa['prioridade'] == 'Baixa' %}selected{% endif %}
+                    >
+                        Baixa
+                    </option>
+
+                    <option
+                        value="Media"
+                        {% if tarefa['prioridade'] == 'Media' %}selected{% endif %}
+                    >
+                        Média
+                    </option>
+
+                    <option
+                        value="Alta"
+                        {% if tarefa['prioridade'] == 'Alta' %}selected{% endif %}
+                    >
+                        Alta
+                    </option>
+
+                </select>
+
+                <label for="data_vencimento">Data de vencimento</label>
+                
+                <input
+                    type="date"
+                    id="data_vencimento"
+                    name="data_vencimento"
+                    value="{{ tarefa['data_vencimento'] or '' }}"
+                >   
+
+                    <a href="{{ url_for('inicio') }}" class="botao secundario">
+                        Cancelar
+                    </a>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
