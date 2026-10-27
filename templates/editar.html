@@ -33,6 +33,7 @@
                 action="{{ url_for('editar', id=tarefa['id']) }}"
                 method="POST"
             >
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                 <label for="titulo">Título</label>
 
@@ -51,12 +52,8 @@
                     id="descricao"
                     name="descricao"
                     rows="5"
+                    maxlength="5000"
                 >{{ tarefa['descricao'] or '' }}</textarea>
-
-                <div class="acoes">
-                    <button type="submit" class="botao primario">
-                        Salvar alterações
-                    </button>
 
                 <label for="prioridade">Prioridade</label>
 
@@ -92,8 +89,12 @@
                     id="data_vencimento"
                     name="data_vencimento"
                     value="{{ tarefa['data_vencimento'] or '' }}"
-                >   
+                >
 
+                <div class="acoes">
+                    <button type="submit" class="botao primario">
+                        Salvar alterações
+                    </button>
                     <a href="{{ url_for('inicio') }}" class="botao secundario">
                         Cancelar
                     </a>

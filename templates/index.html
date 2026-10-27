@@ -66,6 +66,7 @@
             <h2>Nova tarefa</h2>
 
             <form action="{{ url_for('adicionar') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                 <label for="titulo">Título</label>
 
@@ -85,6 +86,7 @@
                     name="descricao"
                     placeholder="Descreva sua tarefa..."
                     rows="3"
+                    maxlength="5000"
                 ></textarea>
 
                 <label for="prioridade">Prioridade</label>
@@ -236,6 +238,7 @@
                                     action="{{ url_for('concluir', id=tarefa['id']) }}"
                                     method="POST"
                                 >
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                     <button type="submit" class="botao secundario">
                                         {% if tarefa['concluida'] %}
                                             Reabrir
@@ -259,6 +262,7 @@
                                     method="POST"
                                     onsubmit="return confirm('Deseja excluir esta tarefa?');"
                                 >
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                     <button type="submit" class="botao perigo">
                                         Excluir
                                     </button>
@@ -272,10 +276,40 @@
 
                 </ul>
 
+                {% if total_paginas > 1 %}
+                    <nav class="paginacao" aria-label="Paginação das tarefas">
+                        <span>Página {{ pagina }} de {{ total_paginas }}</span>
+
+                        <div class="acoes-paginacao">
+                            {% if pagina > 1 %}
+                                <a
+                                    class="botao secundario"
+                                    href="{{ url_for('inicio', busca=busca, status=status, prioridade=prioridade, pagina=pagina - 1) }}"
+                                >
+                                    Anterior
+                                </a>
+                            {% endif %}
+
+                            {% if pagina < total_paginas %}
+                                <a
+                                    class="botao secundario"
+                                    href="{{ url_for('inicio', busca=busca, status=status, prioridade=prioridade, pagina=pagina + 1) }}"
+                                >
+                                    Próxima
+                                </a>
+                            {% endif %}
+                        </div>
+                    </nav>
+                {% endif %}
+
             {% else %}
 
                 <p class="vazio">
-                    Você ainda não cadastrou nenhuma tarefa.
+                    {% if total_filtrado == 0 and estatisticas['total'] > 0 %}
+                        Nenhuma tarefa corresponde aos filtros selecionados.
+                    {% else %}
+                        Você ainda não cadastrou nenhuma tarefa.
+                    {% endif %}
                 </p>
 
             {% endif %}

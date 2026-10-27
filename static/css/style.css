@@ -108,12 +108,6 @@ form > .primario {
     margin-top: 18px;
 }
 
-.lista-tarefas {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
 .tarefa {
     padding: 18px 0;
     border-bottom: 1px solid #e5e7eb;
@@ -182,30 +176,6 @@ form > .primario {
     margin: 8px 0 0;
     font-size: 13px;
     color: #6b7280;
-}
-
-.prioridade {
-    display: inline-block;
-   margin-top: 8px;
-    padding: 5px 9px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.prioridade-alta {
-    background-color: #fee2e2;
-    color: #991b1b;
-}
-
-.prioridade-media {
-     background-color: #fef3c7;
-     color: #92400e;
-}
-
-.prioridade-baixa {
-    background-color: #dcfce7;
-    color: #166534;
 }
 
 select {
@@ -475,12 +445,6 @@ select {
     background-color: #dbeafe;
 }
 
-/* Formulários de ação */
-.lista-tarefas form {
-    display: inline-block;
-    margin: 4px 4px 4px 0;
-}
-
 /* Alinhar os botões de ação */
 .lista-tarefas form {
     display: inline-flex;
@@ -500,6 +464,21 @@ select {
     vertical-align: middle;
 }
 
+.paginacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.acoes-paginacao {
+    display: flex;
+    gap: 8px;
+}
+
 /* Ajustes para telas pequenas */
 @media (max-width: 600px) {
     .container {
@@ -513,39 +492,6 @@ select {
 
     .acoes .botao {
         font-size: 13px;
-    }
-
-    .prioridade {
-        display: inline-block;
-        margin-top: 8px;
-        padding: 5px 9px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    .prioridade-alta {
-        background-color: #fee2e2;
-        color: #991b1b;
-    }
-
-    .prioridade-media {
-        background-color: #fef3c7;
-        color: #92400e;
-    }
-
-    .prioridade-baixa {
-        background-color: #dcfce7;
-        color: #166534;
-    }
-
-    select {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #d1d5db;
-        border-radius: 7px;
-        font: inherit;
-        background-color: white;
     }
 
     .painel-estatisticas {
@@ -571,5 +517,10 @@ select {
 
     .lista-tarefas > li h3 {
         font-size: 17px;
+    }
+
+    .paginacao {
+        align-items: flex-start;
+        flex-direction: column;
     }
 }

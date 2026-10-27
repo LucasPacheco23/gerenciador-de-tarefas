@@ -1,121 +1,83 @@
 # Gerenciador de Tarefas
 
-Aplicação web para gerenciamento de tarefas, desenvolvida como projeto de portfólio para praticar desenvolvimento web com Python, HTML, CSS e banco de dados SQLite.
+Aplicação web em Flask para criar, editar, concluir e excluir tarefas. As tarefas podem ter descrição, prioridade e data de vencimento; a lista oferece pesquisa, filtros, estatísticas e paginação. Os dados são armazenados localmente em SQLite.
 
-## Sobre o projeto
+## Tecnologias
 
-O **Gerenciador de Tarefas** é uma aplicação que tem como objetivo facilitar a organização de atividades em um só lugar.
+- Python e Flask
+- HTML5 e CSS3
+- SQLite
+- `unittest` para testes automatizados
 
-O projeto utiliza Python no backend, páginas HTML para a interface, CSS para a estilização e um banco de dados para armazenar informações.
+## Requisitos
 
-## Funcionalidades
+- Python 3.9 ou superior
+- Git
+- PowerShell (para os comandos abaixo no Windows)
 
-- Visualização das tarefas cadastradas.
-- Edição de tarefas.
-- Armazenamento de dados em banco de dados.
-- Interface web organizada.
+## Executar localmente
 
-*Observação: ajuste esta lista para corresponder exatamente às funcionalidades implementadas no projeto.*
+Clone o repositório e entre na pasta:
 
-## Tecnologias utilizadas
+```powershell
+git clone https://github.com/LucasPacheco23/gerenciador-de-tarefas.git
+cd gerenciador-de-tarefas
+```
 
-- **Python** — lógica e processamento no backend.
-- **HTML5** — estrutura das páginas.
-- **CSS3** — estilização da interface.
-- **SQLite** — armazenamento local dos dados.
-- **Git e GitHub** — controle de versão e publicação do código.
+Crie e ative um ambiente virtual e instale as dependências:
 
-## Estrutura do projeto
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Configure uma chave secreta para a sessão do Flask. Gere outra chave para cada ambiente e não a compartilhe nem a salve no repositório:
+
+```powershell
+$env:FLASK_SECRET_KEY = (python -c "import secrets; print(secrets.token_hex(32))")
+```
+
+Inicie o servidor local:
+
+```powershell
+python app.py
+```
+
+Abra o endereço local exibido no terminal. O modo de depuração fica desativado por padrão. Para habilitá-lo somente durante o desenvolvimento no PowerShell, execute `$env:FLASK_DEBUG = "1"` antes de iniciar. O servidor integrado do Flask é destinado ao desenvolvimento; use um servidor WSGI apropriado em produção.
+
+O banco `tarefas.db` é criado na pasta do projeto na primeira inicialização e atualizado automaticamente quando novas colunas são necessárias.
+
+## Testes
+
+Com o ambiente virtual ativado, execute:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+Os testes usam bancos temporários e não alteram o banco de dados local do projeto.
+
+## Estrutura
 
 ```text
 gerenciador-de-tarefas/
 ├── static/
-│   ├── css/
+│   └── css/
 │       └── style.css
 ├── templates/
 │   ├── editar.html
 │   └── index.html
+├── tests/
+│   └── test_app.py
 ├── app.py
 ├── database.py
 ├── requirements.txt
-├── .gitignore
 └── README.md
 ```
 
-O banco de dados local e o ambiente virtual são mantidos fora do repositório por meio do `.gitignore`.
-
-## ⚙️ Como executar o projeto
-
-### Pré-requisitos
-
-- Python instalado.
-- Git instalado.
-- Um terminal para executar os comandos.
-
-### 1. Clone o repositório
-
-```bash
-git clone URL_DO_SEU_REPOSITORIO
-```
-
-Entre na pasta do projeto:
-
-```bash
-cd gerenciador-de-tarefas
-```
-
-### 2. Crie um ambiente virtual
-
-No Windows:
-
-```bash
-python -m venv .venv
-```
-
-Ative o ambiente virtual no PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-### 3. Instale as dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configuração de segurança
-
-A aplicação utiliza a variável de ambiente `FLASK_SECRET_KEY` para configurar a chave secreta do Flask.
-
-Antes de iniciar o servidor, configure essa variável no terminal. Não armazene chaves secretas diretamente no código-fonte nem as publique no repositório.
-
-A chave utilizada localmente deve ser configurada novamente quando necessário. Em ambientes de produção, utilize uma variável de ambiente persistente e protegida.
-
-```bash
-$env:FLASK_SECRET_KEY = python -c "import secrets; print(secrets.token_hex(32))"
-```
-
-### 5. Execute a aplicação
-
-```bash
-python app.py
-```
-
-Se a aplicação iniciar um servidor web local, acesse no navegador o endereço indicado no terminal.
-
-> Os comandos de execução podem precisar de ajustes conforme a configuração do projeto.
-
-## Objetivo
-
-Este projeto faz parte do meu portfólio de desenvolvimento e tem como objetivo demonstrar meus conhecimentos em programação Python, desenvolvimento de interfaces web, organização de código e persistência de dados.
+O ambiente virtual, o banco de dados e arquivos locais de configuração não são versionados.
 
 ## Autor
 
-Lucas Pacheco
-
-- GitHub: (https://github.com/in/lucas-pacheco-782962393/)
-
----
-
-Desenvolvido como projeto de estudo e portfólio.
+[Lucas Pacheco no GitHub](https://github.com/LucasPacheco23)

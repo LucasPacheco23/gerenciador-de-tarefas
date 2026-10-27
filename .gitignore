@@ -17,8 +17,6 @@ __pycache__/
 # Variáveis de ambiente e segredos
 .env
 .env.*
-.venv/
-_pycache_/
 
 # Exceção para arquivos de exemplo, se necessário
 !.env.example
